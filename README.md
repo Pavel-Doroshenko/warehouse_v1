@@ -1,1 +1,1 @@
-# warehouse_v1
+Домашнее задание по теме Djangorestframework
