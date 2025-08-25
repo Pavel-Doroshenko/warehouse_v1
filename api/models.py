@@ -3,19 +3,18 @@ from django.db import models
 from django.db.models import CASCADE
 from rest_framework.fields import CharField
 
-#Создадим модель пользователя
-class TypeUser(models.Model):
-    type_user = models.CharField(max_length=60)
+#Создадим категорию пользователя
+class Category(models.Model):
+    name = models.CharField(max_length=60)
 
 
-# Создаем модель "пользователь"
+# Создаем модель пользователь
 class ApiUser(AbstractUser):
-    type_user = models.ForeignKey(TypeUser,related_name='apiusers', on_delete=CASCADE)
-    ...
+    cat = models.ForeignKey(Category, related_name='users', on_delete=CASCADE)
 
 
     def __str__(self):
-        return f'user {self.username}: {self.type_user}'
+        return f'user {self.username}: {self.cat}'
 
 
 #Создаем модель "склад"

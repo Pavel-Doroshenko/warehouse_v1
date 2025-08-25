@@ -1,6 +1,6 @@
 from rest_framework import serializers, validators
 
-from api.models import ApiUser, Warehouse, Product
+from api.models import ApiUser, Warehouse, Product, Category
 
 
 class UserSerializer(serializers.Serializer):
@@ -11,7 +11,7 @@ class UserSerializer(serializers.Serializer):
         validators.UniqueValidator(ApiUser.objects.all())
     ])
     password = serializers.CharField(min_length=6, max_length=20, write_only=True)
-    type_user_id = serializers.CharField( write_only=True)
+    cat_id = serializers.CharField( write_only=True)
 
     def update(self, instance, validated_data):
         if email := validated_data.get("email"):
@@ -27,12 +27,19 @@ class UserSerializer(serializers.Serializer):
         user = ApiUser.objects.create(
             email=validated_data["email"],
             username=validated_data["username"],
-            type_user_id=validated_data["type_user_id"],
+            cat_id=validated_data["cat_id"],
         )
 
         user.set_password(validated_data["password"])
         user.save(update_fields=["password"])
         return user
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
+        extra_kwargs = {"id": {"read_only": True}}
+
 
 class WarehouseSerializer(serializers.ModelSerializer):
     class Meta:
