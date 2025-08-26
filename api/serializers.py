@@ -1,6 +1,6 @@
 from rest_framework import serializers, validators
 
-from api.models import ApiUser, Warehouse, Product, Category
+from api.models import ApiUser, Warehouse, Product, Category, Basket
 
 
 class UserSerializer(serializers.Serializer):
@@ -53,3 +53,12 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = "__all__"
         extra_kwargs = {"id": {"read_only": True}}
+
+
+class BasketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Basket
+        fields = "__all__"
+        extra_kwargs = {"id": {'read_only': True}}
+
+

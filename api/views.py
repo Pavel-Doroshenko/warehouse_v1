@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 
-from api.models import ApiUser, Warehouse, Product, Category
-from api.serializers import UserSerializer, WarehouseSerializer, ProductSerializer, CategorySerializer
+from api.models import ApiUser, Warehouse, Product, Category, Basket
+from api.serializers import UserSerializer, WarehouseSerializer, ProductSerializer, CategorySerializer, BasketSerializer
 
 
 class CategoryModelViewSet(viewsets.ModelViewSet):
@@ -27,3 +27,8 @@ class WarehouseModelViewSet(viewsets.ModelViewSet):
 class ProductModelViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+
+class BasketModelViewSet(viewsets.ModelViewSet):
+    queryset = Basket.objects.all()
+    serializer_class = BasketSerializer
