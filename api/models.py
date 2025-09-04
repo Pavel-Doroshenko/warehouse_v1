@@ -45,5 +45,5 @@ class Basket(models.Model):
     user = models.ForeignKey(ApiUser, related_name='baskets', on_delete=CASCADE)
 
     def __str__(self):
-        return f'{self.user}; {self.product.Warehouse.name} ; {self.product.name} = {self.product.quantity}'
+        return f'{self.user} ; {self.product.name} = {self.quantity}'
 
